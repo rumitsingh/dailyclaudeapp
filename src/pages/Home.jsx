@@ -6,7 +6,7 @@ import WorkoutBanner from '../components/WorkoutBanner.jsx'
 import { getTimeBasedEncouragement } from '../data/encouragements.js'
 import { useMemo } from 'react'
 
-export default function Home({ todos, settings, dinnerHistory, onNavigate }) {
+export default function Home({ todos, settings, dinnerHistory, onNavigate, workoutDoneToday, markWorkoutDone }) {
   const today = new Date()
   const dateStr = today.toLocaleDateString('en-GB', {
     weekday: 'long',
@@ -44,7 +44,12 @@ export default function Home({ todos, settings, dinnerHistory, onNavigate }) {
       <DinnerCard dinnerHistory={dinnerHistory} onNavigate={onNavigate} />
 
       {/* Workout reminder */}
-      <WorkoutBanner workoutTime={settings.workoutTime} onNavigate={onNavigate} />
+      <WorkoutBanner
+        workoutTime={settings.workoutTime}
+        onNavigate={onNavigate}
+        isDone={workoutDoneToday}
+        onMarkDone={markWorkoutDone}
+      />
     </div>
   )
 }
