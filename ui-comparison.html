@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily App — 5 UI Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #111114;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px 64px;
+  font-family: 'Inter', sans-serif;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.page-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 10px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.92);
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+.page-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 400;
+}
+
+.phones-grid {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.phone-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.phone-label {
+  text-align: center;
+}
+
+.phone-label .num {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.phone-label .name {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  display: block;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.phone-label .palette {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.phone-label .tagline {
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  display: block;
+  font-style: italic;
+}
+
+/* ── Phone Frame ── */
+.phone-frame {
+  width: 265px;
+  height: 574px;
+  border-radius: 48px;
+  background: #0a0a0a;
+  padding: 4px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 0 0 2px rgba(0,0,0,0.8),
+    0 40px 100px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  position: relative;
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 44px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Dynamic island */
+.island {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 78px;
+  height: 24px;
+  background: #0a0a0a;
+  border-radius: 20px;
+  z-index: 100;
+}
+
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 22px 0;
+  font-size: 11px;
+  font-weight: 600;
+  position: relative;
+  z-index: 10;
+}
+
+.status-icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+}
+
+/* ════════════════════════════════
+   OPTION 1 — MORNING MIST
+════════════════════════════════ */
+.screen-1 {
+  background: #FAF7F2;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.s1-status { color: #9B8373; }
+
+.s1-body {
+  flex: 1;
+  padding: 6px 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  overflow: hidden;
+}
+
+.s1-date .s1-day {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #C9ADA7;
+  margin-bottom: 1px;
+}
+
+.s1-date .s1-full {
+  font-family: 'Lora', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #3E2F25;
+  line-height: 1;
+}
+
+.s1-quote {
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 10px 15px;
+  border-left: 3px solid #8FAF8A;
+  box-shadow: 0 2px 14px rgba(62,47,37,0.07);
+}
+
+.s1-qlabel {
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #8FAF8A;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.s1-qtext {
+  font-family: 'Lora', serif;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: #3E2F25;
+  font-style: italic;
+}
+
+.s1-week {
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 9px 14px;
+  box-shadow: 0 2px 14px rgba(62,47,37,0.07);
+}
+
+.s1-wlabel {
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #C9ADA7;
+  margin-bottom: 7px;
+  font-weight: 700;
+}
+
+.s1-days {
+  display: flex;
+  gap: 5px;
+}
+
+.s1-day-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.s1-dlabel { font-size: 7.5px; font-weight: 700; color: #C9ADA7; letter-spacing: 0.06em; }
+.s1-dot { width: 18px; height: 18px; border-radius: 50%; background: #EDE6DE; }
+.s1-dot.done { background: #8FAF8A; }
+.s1-dot.today { background: #C9ADA7; border: 2px solid #A8867A; }
+.s1-dot.future { background: #F0EAE3; }
+
+.s1-cards {
+  display: flex;
+  gap: 10px;
+}
+
+.s1-card {
+  flex: 1;
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 13px 12px;
+  box-shadow: 0 2px 14px rgba(62,47,37,0.07);
+}
+
+.s1-ci { font-size: 17px; margin-bottom: 5px; }
+.s1-ct { font-size: 10px; font-weight: 600; color: #3E2F25; margin-bottom: 2px; }
+.s1-cs { font-size: 9px; color: #C9ADA7; }
+
+.s1-workout {
+  background: #8FAF8A;
+  border-radius: 14px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.s1-wl-label { font-size: 8px; color: rgba(255,255,255,0.7); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2px; font-weight: 700; }
+.s1-wl-time { font-family: 'Lora', serif; font-size: 15px; color: #fff; font-weight: 600; }
+.s1-wl-icon { font-size: 19px; opacity: 0.85; }
+
+.s1-nav {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 0 12px;
+}
+
+.s1-nd { width: 5px; height: 5px; border-radius: 50%; background: #DDD5CC; }
+.s1-nd.a { background: #8FAF8A; width: 16px; border-radius: 3px; }
+
+/* ── Stone & Sky checklist merged into Morning Mist ── */
+.s1-checklist {
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 9px 14px 8px;
+  box-shadow: 0 2px 14px rgba(62,47,37,0.07);
+}
+
+.s1-cl-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.s1-cl-label {
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #C9ADA7;
+  font-weight: 700;
+}
+
+.s1-dinner-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #F5EFE8;
+  border-radius: 20px;
+  padding: 3px 9px 3px 6px;
+  font-size: 8.5px;
+  font-weight: 600;
+  color: #8B6E5A;
+}
+
+.s1-cl-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px solid #F5EFE8;
+}
+
+.s1-cl-item:last-child { border-bottom: none; padding-bottom: 1px; }
+
+.s1-chk {
+  width: 17px;
+  height: 17px;
+  border-radius: 5px;
+  border: 1.5px solid #D8CCC4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 9px;
+  color: white;
+}
+
+.s1-chk.done { background: #8FAF8A; border-color: #8FAF8A; }
+
+.s1-cl-text {
+  flex: 1;
+  font-size: 11px;
+  color: #3E2F25;
+  font-weight: 400;
+}
+
+.s1-cl-text.done { text-decoration: line-through; color: #C9ADA7; }
+
+.s1-cl-time {
+  font-size: 8.5px;
+  color: #C9ADA7;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.s1-dinner {
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 9px 14px;
+  box-shadow: 0 2px 14px rgba(62,47,37,0.07);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.s1-dinner-icon {
+  width: 28px;
+  height: 28px;
+  background: #F5EFE8;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.s1-dinner-text { flex: 1; }
+.s1-dinner-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #3E2F25;
+  margin-bottom: 2px;
+}
+.s1-dinner-sub {
+  font-size: 8.5px;
+  color: #C9ADA7;
+}
+
+.s1-dinner-arrow {
+  font-size: 13px;
+  color: #C9ADA7;
+}
+
+
+/* ════════════════════════════════
+   OPTION 2 — MIDNIGHT GARDEN
+════════════════════════════════ */
+.screen-2 {
+  background: #0D1B2A;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.s2-status { color: rgba(255,255,255,0.55); }
+
+.s2-body {
+  flex: 1;
+  padding: 8px 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  overflow: hidden;
+}
+
+.s2-date .s2-daylabel {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 9.5px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  margin-bottom: 1px;
+}
+
+.s2-date .s2-full {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 300;
+  color: #FFFFFF;
+  line-height: 1;
+}
+
+.s2-quote {
+  background: #1E3A5F;
+  border-radius: 14px;
+  padding: 15px;
+  border: 1px solid rgba(201,168,76,0.22);
+}
+
+.s2-star { color: #C9A84C; font-size: 11px; margin-bottom: 7px; display: block; letter-spacing: 4px; }
+
+.s2-qtext {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.88);
+  font-style: italic;
+}
+
+.s2-qattr {
+  font-size: 8.5px;
+  color: #C9A84C;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 7px;
+  display: block;
+}
+
+.s2-week {
+  display: flex;
+  gap: 4px;
+}
+
+.s2-wcol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.s2-wl { font-size: 7.5px; font-weight: 600; color: rgba(255,255,255,0.28); letter-spacing: 0.06em; text-transform: uppercase; }
+.s2-wd { width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); }
+.s2-wd.done { background: #C9A84C; border-color: #C9A84C; }
+.s2-wd.today { background: transparent; border: 2px solid #C9A84C; box-shadow: 0 0 10px rgba(201,168,76,0.35); }
+
+.s2-list { display: flex; flex-direction: column; gap: 8px; }
+
+.s2-item {
+  background: rgba(30,58,95,0.55);
+  border-radius: 12px;
+  padding: 11px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(201,168,76,0.07);
+}
+
+.s2-il { display: flex; align-items: center; gap: 10px; }
+.s2-ii { font-size: 14px; }
+.s2-it { font-size: 11.5px; font-weight: 500; color: rgba(255,255,255,0.82); margin-bottom: 1px; }
+.s2-is { font-size: 8.5px; color: rgba(255,255,255,0.28); }
+.s2-ia { color: rgba(201,168,76,0.55); font-size: 12px; }
+
+.s2-workout {
+  background: linear-gradient(135deg, #B8923C, #D4AE58);
+  border-radius: 12px;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.s2-wi { font-size: 15px; }
+.s2-wt { font-size: 10px; font-weight: 700; color: #0D1B2A; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1px; }
+.s2-ws { font-size: 8.5px; color: rgba(13,27,42,0.55); }
+
+.s2-nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 9px 20px 14px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.s2-ni { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.s2-nico { font-size: 14px; opacity: 0.3; }
+.s2-nico.a { opacity: 1; }
+.s2-ndot { width: 3px; height: 3px; border-radius: 50%; background: #C9A84C; }
+
+
+/* ════════════════════════════════
+   OPTION 3 — STONE & SKY
+════════════════════════════════ */
+.screen-3 {
+  background: #FFFFFF;
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.s3-status { color: #1A1A1A; }
+
+.s3-body {
+  flex: 1;
+  padding: 8px 20px 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.s3-date { margin-bottom: 14px; }
+.s3-dsmall { font-size: 9.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #9CA3AF; margin-bottom: 1px; }
+.s3-dlarge { font-size: 31px; font-weight: 700; color: #111827; line-height: 1; letter-spacing: -0.04em; }
+
+.s3-div { height: 1px; background: #F3F4F6; margin-bottom: 13px; }
+
+.s3-sumrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 13px;
+}
+
+.s3-badge { background: #EFF6FF; color: #2563EB; font-size: 9.5px; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
+.s3-sumtext { font-size: 9.5px; color: #9CA3AF; }
+
+.s3-quote { margin-bottom: 13px; }
+.s3-qbar { width: 22px; height: 2.5px; background: #2563EB; border-radius: 2px; margin-bottom: 7px; }
+.s3-qtext { font-size: 12.5px; line-height: 1.55; color: #374151; }
+.s3-qauth { font-size: 9.5px; color: #9CA3AF; margin-top: 4px; }
+
+.s3-tasks { flex: 1; display: flex; flex-direction: column; }
+
+.s3-task {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 0;
+  border-bottom: 1px solid #F9FAFB;
+}
+
+.s3-chk {
+  width: 17px;
+  height: 17px;
+  border-radius: 5px;
+  border: 1.5px solid #D1D5DB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 9px;
+}
+
+.s3-chk.done { background: #2563EB; border-color: #2563EB; color: white; }
+.s3-tlabel { flex: 1; font-size: 11.5px; color: #374151; }
+.s3-tlabel.done { text-decoration: line-through; color: #9CA3AF; }
+.s3-ttime { font-size: 9px; color: #9CA3AF; }
+
+.s3-workout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #F8FAFC;
+  border-radius: 13px;
+  padding: 11px 13px;
+  margin: 10px 0;
+}
+
+.s3-wrow { display: flex; align-items: center; gap: 10px; }
+
+.s3-wico {
+  width: 31px;
+  height: 31px;
+  background: #2563EB;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: white;
+}
+
+.s3-wt { font-size: 11px; font-weight: 600; color: #111827; margin-bottom: 1px; }
+.s3-ws { font-size: 8.5px; color: #9CA3AF; }
+
+.s3-toggle {
+  width: 30px;
+  height: 17px;
+  background: #2563EB;
+  border-radius: 9px;
+  position: relative;
+}
+.s3-toggle::after {
+  content: '';
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  width: 13px;
+  height: 13px;
+  background: white;
+  border-radius: 50%;
+}
+
+.s3-tabs {
+  display: flex;
+  justify-content: space-around;
+  padding: 9px 0 14px;
+  border-top: 1px solid #F3F4F6;
+}
+
+.s3-ti { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.s3-tii { font-size: 15px; opacity: 0.25; }
+.s3-tii.a { opacity: 1; }
+.s3-til { font-size: 7.5px; color: #9CA3AF; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.s3-til.a { color: #2563EB; }
+
+
+/* ════════════════════════════════
+   OPTION 4 — BOTANICAL
+════════════════════════════════ */
+.screen-4 {
+  background: #F5F0E8;
+  font-family: 'Nunito', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.s4-deco {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 90px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* leaf SVG shapes via CSS */
+.s4-leaf {
+  position: absolute;
+  border-radius: 0 50% 0 50%;
+  background: rgba(125,155,118,0.12);
+  transform: rotate(-35deg);
+}
+.s4-l1 { width: 48px; height: 28px; top: 8px; left: -8px; transform: rotate(-25deg); }
+.s4-l2 { width: 36px; height: 20px; top: 18px; left: 10px; transform: rotate(10deg); }
+.s4-l3 { width: 42px; height: 24px; top: 4px; right: 14px; transform: rotate(45deg); }
+.s4-l4 { width: 30px; height: 18px; top: 22px; right: 28px; transform: rotate(-10deg); }
+
+.s4-status { color: #4A3327; position: relative; z-index: 10; }
+
+.s4-body {
+  flex: 1;
+  padding: 6px 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+
+.s4-greeting .s4-good { font-size: 9.5px; color: #7D9B76; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1px; }
+.s4-greeting .s4-name { font-family: 'Playfair Display', serif; font-size: 25px; color: #3D2B1F; font-weight: 400; line-height: 1; }
+
+.s4-quote {
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 13px 15px;
+  border-left: 3px solid #C07A5A;
+  box-shadow: 0 2px 18px rgba(61,43,31,0.08);
+}
+
+.s4-qmarks { font-family: 'Playfair Display', serif; font-size: 22px; color: #C07A5A; line-height: 0.7; margin-bottom: 5px; display: block; }
+.s4-qtext { font-family: 'Playfair Display', serif; font-size: 12px; line-height: 1.6; color: #3D2B1F; font-style: italic; }
+.s4-qattr { font-size: 8.5px; color: #C07A5A; margin-top: 5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+
+.s4-week {
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 11px 13px;
+  box-shadow: 0 2px 18px rgba(61,43,31,0.08);
+}
+
+.s4-wh { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; }
+.s4-wl { font-size: 8.5px; font-weight: 700; color: #C07A5A; letter-spacing: 0.12em; text-transform: uppercase; }
+.s4-wpct { font-size: 8.5px; color: #A89080; }
+
+.s4-wbar { display: flex; gap: 4px; }
+.s4-wsq { flex: 1; height: 5px; border-radius: 3px; background: #EDE4D8; }
+.s4-wsq.done { background: #C07A5A; }
+.s4-wsq.today { background: #7D9B76; }
+
+.s4-cards { display: flex; gap: 10px; }
+
+.s4-card {
+  flex: 1;
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 13px 12px;
+  box-shadow: 0 2px 18px rgba(61,43,31,0.08);
+}
+
+.s4-ci { font-size: 19px; margin-bottom: 5px; }
+.s4-ct { font-size: 10.5px; font-weight: 700; color: #3D2B1F; margin-bottom: 2px; }
+.s4-cs { font-size: 8.5px; color: #A89080; }
+
+.s4-todos {
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 18px rgba(61,43,31,0.08);
+}
+
+.s4-th { font-size: 8px; font-weight: 700; color: #7D9B76; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 7px; }
+
+.s4-titem { display: flex; align-items: center; gap: 8px; padding: 3px 0; }
+.s4-tdot { width: 6px; height: 6px; border-radius: 50%; background: #C07A5A; flex-shrink: 0; }
+.s4-tdot.done { background: #7D9B76; }
+.s4-ttext { font-size: 10.5px; color: #3D2B1F; }
+.s4-ttime { margin-left: auto; font-size: 8.5px; color: #A89080; }
+
+.s4-workout {
+  background: #7D9B76;
+  border-radius: 14px;
+  padding: 11px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.s4-wlabel { font-size: 8px; color: rgba(255,255,255,0.65); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2px; font-weight: 700; }
+.s4-wtime { font-family: 'Playfair Display', serif; font-size: 15px; color: #fff; }
+.s4-wicon { font-size: 19px; }
+
+.s4-nav { display: flex; justify-content: center; gap: 6px; padding: 8px 0 13px; }
+.s4-nd { width: 5px; height: 5px; border-radius: 50%; background: #D4C4B0; }
+.s4-nd.a { background: #C07A5A; width: 15px; border-radius: 3px; }
+
+
+/* ════════════════════════════════
+   OPTION 5 — GLASS & BLOOM
+════════════════════════════════ */
+.screen-5 {
+  background: linear-gradient(158deg, #C4B4E4 0%, #E4BEB4 50%, #F0D0A8 100%);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.s5-blob1 {
+  position: absolute;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(180,130,210,0.45) 0%, transparent 70%);
+  top: -60px; left: -50px;
+  pointer-events: none;
+}
+
+.s5-blob2 {
+  position: absolute;
+  width: 170px; height: 170px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,170,100,0.4) 0%, transparent 70%);
+  bottom: 40px; right: -40px;
+  pointer-events: none;
+}
+
+.s5-blob3 {
+  position: absolute;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,220,255,0.3) 0%, transparent 70%);
+  top: 180px; right: 20px;
+  pointer-events: none;
+}
+
+.s5-status { color: rgba(255,255,255,0.92); position: relative; z-index: 10; }
+
+.s5-body {
+  flex: 1;
+  padding: 8px 18px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.s5-toprow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.s5-dayname { font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.68); margin-bottom: 1px; }
+.s5-datenum { font-size: 30px; font-weight: 700; color: white; line-height: 1; letter-spacing: -0.04em; }
+
+.s5-streak {
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.38);
+  border-radius: 20px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.s5-si { font-size: 11px; }
+.s5-st { font-size: 9.5px; font-weight: 700; color: white; }
+
+/* Glass base */
+.glass {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.36);
+  border-radius: 18px;
+}
+
+.s5-quote {
+  padding: 15px;
+}
+
+.s5-qtop { display: flex; align-items: center; gap: 5px; margin-bottom: 7px; }
+.s5-qicon { font-size: 11px; }
+.s5-qlabel { font-size: 8.5px; font-weight: 700; color: rgba(255,255,255,0.65); letter-spacing: 0.14em; text-transform: uppercase; }
+.s5-qtext { font-size: 12.5px; line-height: 1.55; color: white; font-weight: 400; }
+
+.s5-cards { display: flex; gap: 9px; }
+
+.s5-card {
+  flex: 1;
+  padding: 13px 12px;
+}
+
+.s5-cicon { font-size: 19px; margin-bottom: 6px; }
+.s5-ctitle { font-size: 10.5px; font-weight: 600; color: white; margin-bottom: 2px; }
+.s5-csub { font-size: 8.5px; color: rgba(255,255,255,0.58); }
+.s5-cbadge {
+  display: inline-block;
+  background: rgba(255,255,255,0.24);
+  color: white;
+  font-size: 7.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-top: 4px;
+}
+
+.s5-schedule {
+  padding: 13px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.s5-sl { display: flex; align-items: center; gap: 10px; }
+.s5-sdot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,220,80,0.95); box-shadow: 0 0 10px rgba(255,210,60,0.55); }
+.s5-stitle { font-size: 11.5px; font-weight: 600; color: white; margin-bottom: 1px; }
+.s5-ssub { font-size: 8.5px; color: rgba(255,255,255,0.48); }
+.s5-sarrow { color: rgba(255,255,255,0.45); font-size: 13px; }
+
+.s5-workout {
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.s5-wibox {
+  width: 33px; height: 33px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+}
+
+.s5-wt { font-size: 11.5px; font-weight: 600; color: white; margin-bottom: 1px; }
+.s5-ws { font-size: 8.5px; color: rgba(255,255,255,0.48); }
+.s5-wtime { margin-left: auto; font-size: 15px; font-weight: 700; color: white; letter-spacing: -0.03em; }
+
+.s5-tabs {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 16px 14px;
+  background: rgba(255,255,255,0.14);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.22);
+  position: relative;
+  z-index: 10;
+}
+
+.s5-ti { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.s5-tii { font-size: 15px; opacity: 0.35; }
+.s5-tii.a { opacity: 1; }
+.s5-tdot { width: 4px; height: 4px; border-radius: 50%; background: white; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <p class="page-eyebrow">UI Direction Comparison</p>
+  <h1 class="page-title">Daily App — 5 Concepts</h1>
+  <p class="page-sub">Thursday, March 5 &nbsp;·&nbsp; iPhone home screen</p>
+</div>
+
+<div class="phones-grid">
+
+  <!-- ── OPTION 1: MORNING MIST ── -->
+  <div class="phone-wrapper">
+    <div class="phone-frame">
+      <div class="phone-screen">
+        <div class="screen-1">
+          <div class="island"></div>
+          <div class="status-bar s1-status">
+            <span>9:41</span>
+            <div class="status-icons"><span>▲</span><span>◼◼◼</span></div>
+          </div>
+          <div class="s1-body">
+            <div class="s1-date">
+              <div class="s1-day">Thursday</div>
+              <div class="s1-full">March 5</div>
+            </div>
+            <div class="s1-quote">
+              <div class="s1-qlabel">Today's words</div>
+              <div class="s1-qtext">"Small steps taken daily<br>are still steps forward."</div>
+            </div>
+            <div class="s1-week">
+              <div class="s1-wlabel">This week</div>
+              <div class="s1-days">
+                <div class="s1-day-col"><span class="s1-dlabel">M</span><div class="s1-dot done"></div></div>
+                <div class="s1-day-col"><span class="s1-dlabel">T</span><div class="s1-dot done"></div></div>
+                <div class="s1-day-col"><span class="s1-dlabel">W</span><div class="s1-dot done"></div></div>
+                <div class="s1-day-col"><span class="s1-dlabel">T</span><div class="s1-dot today"></div></div>
+                <div class="s1-day-col"><span class="s1-dlabel">F</span><div class="s1-dot future"></div></div>
+                <div class="s1-day-col"><span class="s1-dlabel">S</span><div class="s1-dot future"></div></div>
+                <div class="s1-day-col"><span class="s1-dlabel">S</span><div class="s1-dot future"></div></div>
+              </div>
+            </div>
+            <div class="s1-checklist">
+              <div class="s1-cl-header">
+                <span class="s1-cl-label">This week</span>
+              </div>
+              <div class="s1-cl-item">
+                <div class="s1-chk done">✓</div>
+                <span class="s1-cl-text done">Morning walk</span>
+                <span class="s1-cl-time">Done</span>
+              </div>
+              <div class="s1-cl-item">
+                <div class="s1-chk"></div>
+                <span class="s1-cl-text">Update work schedule</span>
+                <span class="s1-cl-time">Sun</span>
+              </div>
+              <div class="s1-cl-item">
+                <div class="s1-chk"></div>
+                <span class="s1-cl-text">Call back dentist</span>
+                <span class="s1-cl-time">Fri</span>
+              </div>
+              <div class="s1-cl-item">
+                <div class="s1-chk"></div>
+                <span class="s1-cl-text">Renew gym membership</span>
+                <span class="s1-cl-time">Sat</span>
+              </div>
+            </div>
+            <div class="s1-dinner">
+              <div class="s1-dinner-icon">🥗</div>
+              <div class="s1-dinner-text">
+                <div class="s1-dinner-title">Dinner Planner</div>
+                <div class="s1-dinner-sub">What's in the fridge tonight?</div>
+              </div>
+              <span class="s1-dinner-arrow">›</span>
+            </div>
+            <div class="s1-workout">
+              <div>
+                <div class="s1-wl-label">Evening workout</div>
+                <div class="s1-wl-time">7:00 pm</div>
+              </div>
+              <div class="s1-wl-icon">🏃</div>
+            </div>
+          </div>
+          <div class="s1-nav">
+            <div class="s1-nd a"></div>
+            <div class="s1-nd"></div>
+            <div class="s1-nd"></div>
+            <div class="s1-nd"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">
+      <span class="num" style="color:rgba(143,175,138,0.8); letter-spacing:0.18em;">✦ Selected Direction</span>
+      <span class="name" style="color:#8FAF8A; font-size:16px;">Morning Mist</span>
+      <div class="palette">
+        <div class="swatch" style="background:#FAF7F2"></div>
+        <div class="swatch" style="background:#8FAF8A"></div>
+        <div class="swatch" style="background:#C9ADA7"></div>
+        <div class="swatch" style="background:#3E2F25"></div>
+      </div>
+      <span class="tagline">Lora · Cream &amp; Sage · with Stone &amp; Sky checklist</span>
+    </div>
+  </div>
+
+
+  <!-- ── OPTION 2: MIDNIGHT GARDEN ── -->
+  <div class="phone-wrapper">
+    <div class="phone-frame">
+      <div class="phone-screen">
+        <div class="screen-2">
+          <div class="island"></div>
+          <div class="status-bar s2-status">
+            <span>9:41</span>
+            <div class="status-icons"><span>▲</span><span>◼◼◼</span></div>
+          </div>
+          <div class="s2-body">
+            <div class="s2-date">
+              <div class="s2-daylabel">Thursday · March</div>
+              <div class="s2-full">5</div>
+            </div>
+            <div class="s2-quote">
+              <span class="s2-star">✦ ✦ ✦</span>
+              <div class="s2-qtext">"You are closer than you were yesterday. Keep going."</div>
+              <span class="s2-qattr">Daily reminder</span>
+            </div>
+            <div class="s2-week">
+              <div class="s2-wcol"><span class="s2-wl">M</span><div class="s2-wd done"></div></div>
+              <div class="s2-wcol"><span class="s2-wl">T</span><div class="s2-wd done"></div></div>
+              <div class="s2-wcol"><span class="s2-wl">W</span><div class="s2-wd done"></div></div>
+              <div class="s2-wcol"><span class="s2-wl">T</span><div class="s2-wd today"></div></div>
+              <div class="s2-wcol"><span class="s2-wl">F</span><div class="s2-wd"></div></div>
+              <div class="s2-wcol"><span class="s2-wl">S</span><div class="s2-wd"></div></div>
+              <div class="s2-wcol"><span class="s2-wl">S</span><div class="s2-wd"></div></div>
+            </div>
+            <div class="s2-list">
+              <div class="s2-item">
+                <div class="s2-il">
+                  <span class="s2-ii">🥗</span>
+                  <div><div class="s2-it">Dinner Planner</div><div class="s2-is">3 suggestions ready</div></div>
+                </div>
+                <span class="s2-ia">›</span>
+              </div>
+              <div class="s2-item">
+                <div class="s2-il">
+                  <span class="s2-ii">📋</span>
+                  <div><div class="s2-it">This Week's Tasks</div><div class="s2-is">2 open · 1 due Friday</div></div>
+                </div>
+                <span class="s2-ia">›</span>
+              </div>
+              <div class="s2-item">
+                <div class="s2-il">
+                  <span class="s2-ii">📅</span>
+                  <div><div class="s2-it">Work Schedule</div><div class="s2-is">Update due Sunday</div></div>
+                </div>
+                <span class="s2-ia">›</span>
+              </div>
+            </div>
+            <div class="s2-workout">
+              <span class="s2-wi">🏃</span>
+              <div><div class="s2-wt">Evening Workout</div><div class="s2-ws">Reminder set for 7:00 pm</div></div>
+            </div>
+          </div>
+          <div class="s2-nav">
+            <div class="s2-ni"><span class="s2-nico a">⊙</span><div class="s2-ndot"></div></div>
+            <div class="s2-ni"><span class="s2-nico">◻</span></div>
+            <div class="s2-ni"><span class="s2-nico">◷</span></div>
+            <div class="s2-ni"><span class="s2-nico">◎</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">
+      <span class="num">Option 02</span>
+      <span class="name">Midnight Garden</span>
+      <div class="palette">
+        <div class="swatch" style="background:#0D1B2A"></div>
+        <div class="swatch" style="background:#1E3A5F"></div>
+        <div class="swatch" style="background:#C9A84C"></div>
+        <div class="swatch" style="background:#FFFFFF"></div>
+      </div>
+      <span class="tagline">Cormorant · Navy &amp; Gold · Evening luxury</span>
+    </div>
+  </div>
+
+
+  <!-- ── OPTION 3: STONE & SKY ── -->
+  <div class="phone-wrapper">
+    <div class="phone-frame">
+      <div class="phone-screen">
+        <div class="screen-3">
+          <div class="island" style="background:#e0e0e0"></div>
+          <div class="status-bar s3-status">
+            <span>9:41</span>
+            <div class="status-icons"><span>▲</span><span>◼◼◼</span></div>
+          </div>
+          <div class="s3-body">
+            <div class="s3-date">
+              <div class="s3-dsmall">March 2026</div>
+              <div class="s3-dlarge">Thursday</div>
+            </div>
+            <div class="s3-div"></div>
+            <div class="s3-sumrow">
+              <span class="s3-badge">3 tasks</span>
+              <span class="s3-badge" style="background:#F0FDF4; color:#16A34A;">1 workout</span>
+              <span class="s3-sumtext">today</span>
+            </div>
+            <div class="s3-quote">
+              <div class="s3-qbar"></div>
+              <div class="s3-qtext">"Discipline is choosing between what you want now and what you want most."</div>
+              <div class="s3-qauth">— Abraham Lincoln</div>
+            </div>
+            <div class="s3-div"></div>
+            <div class="s3-tasks">
+              <div class="s3-task">
+                <div class="s3-chk done">✓</div>
+                <span class="s3-tlabel done">Morning walk</span>
+                <span class="s3-ttime">Done</span>
+              </div>
+              <div class="s3-task">
+                <div class="s3-chk"></div>
+                <span class="s3-tlabel">Update work schedule</span>
+                <span class="s3-ttime">Sun</span>
+              </div>
+              <div class="s3-task">
+                <div class="s3-chk"></div>
+                <span class="s3-tlabel">Plan dinners for week</span>
+                <span class="s3-ttime">Today</span>
+              </div>
+              <div class="s3-task">
+                <div class="s3-chk"></div>
+                <span class="s3-tlabel">Call back dentist</span>
+                <span class="s3-ttime">Fri</span>
+              </div>
+            </div>
+            <div class="s3-workout">
+              <div class="s3-wrow">
+                <div class="s3-wico">🏃</div>
+                <div><div class="s3-wt">Evening Workout</div><div class="s3-ws">Reminder · 7:00 pm</div></div>
+              </div>
+              <div class="s3-toggle"></div>
+            </div>
+          </div>
+          <div class="s3-tabs">
+            <div class="s3-ti"><span class="s3-tii a">⊙</span><span class="s3-til a">Home</span></div>
+            <div class="s3-ti"><span class="s3-tii">◻</span><span class="s3-til">Plan</span></div>
+            <div class="s3-ti"><span class="s3-tii">◷</span><span class="s3-til">Week</span></div>
+            <div class="s3-ti"><span class="s3-tii">☰</span><span class="s3-til">More</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">
+      <span class="num">Option 03</span>
+      <span class="name">Stone &amp; Sky</span>
+      <div class="palette">
+        <div class="swatch" style="background:#FFFFFF; border-color:rgba(255,255,255,0.3)"></div>
+        <div class="swatch" style="background:#1A1A1A"></div>
+        <div class="swatch" style="background:#2563EB"></div>
+        <div class="swatch" style="background:#9CA3AF"></div>
+      </div>
+      <span class="tagline">DM Sans · White &amp; Blue · Nordic clarity</span>
+    </div>
+  </div>
+
+
+  <!-- ── OPTION 4: BOTANICAL ── -->
+  <div class="phone-wrapper">
+    <div class="phone-frame">
+      <div class="phone-screen">
+        <div class="screen-4">
+          <div class="s4-deco">
+            <div class="s4-leaf s4-l1"></div>
+            <div class="s4-leaf s4-l2"></div>
+            <div class="s4-leaf s4-l3"></div>
+            <div class="s4-leaf s4-l4"></div>
+          </div>
+          <div class="island" style="background:#3D2B1F"></div>
+          <div class="status-bar s4-status">
+            <span>9:41</span>
+            <div class="status-icons"><span>▲</span><span>◼◼◼</span></div>
+          </div>
+          <div class="s4-body">
+            <div class="s4-greeting">
+              <div class="s4-good">Good morning</div>
+              <div class="s4-name">Rumit</div>
+            </div>
+            <div class="s4-quote">
+              <span class="s4-qmarks">"</span>
+              <div class="s4-qtext">Rest and be thankful. Even on slow days, you are moving forward.</div>
+              <div class="s4-qattr">Daily thought</div>
+            </div>
+            <div class="s4-week">
+              <div class="s4-wh">
+                <span class="s4-wl">This week</span>
+                <span class="s4-wpct">60% complete</span>
+              </div>
+              <div class="s4-wbar">
+                <div class="s4-wsq done"></div>
+                <div class="s4-wsq done"></div>
+                <div class="s4-wsq done"></div>
+                <div class="s4-wsq today"></div>
+                <div class="s4-wsq"></div>
+                <div class="s4-wsq"></div>
+                <div class="s4-wsq"></div>
+              </div>
+            </div>
+            <div class="s4-cards">
+              <div class="s4-card">
+                <div class="s4-ci">🥦</div>
+                <div class="s4-ct">Fridge &amp; Dinner</div>
+                <div class="s4-cs">Tap to get ideas</div>
+              </div>
+              <div class="s4-card">
+                <div class="s4-ci">🗓</div>
+                <div class="s4-ct">Schedule</div>
+                <div class="s4-cs">Update Sunday</div>
+              </div>
+            </div>
+            <div class="s4-todos">
+              <div class="s4-th">This week's todos</div>
+              <div class="s4-titem">
+                <div class="s4-tdot done"></div>
+                <span class="s4-ttext">Morning walk</span>
+                <span class="s4-ttime">Done</span>
+              </div>
+              <div class="s4-titem">
+                <div class="s4-tdot"></div>
+                <span class="s4-ttext">Call dentist</span>
+                <span class="s4-ttime">Fri</span>
+              </div>
+              <div class="s4-titem">
+                <div class="s4-tdot"></div>
+                <span class="s4-ttext">Renew gym membership</span>
+                <span class="s4-ttime">Sat</span>
+              </div>
+            </div>
+            <div class="s4-workout">
+              <div>
+                <div class="s4-wlabel">Evening workout</div>
+                <div class="s4-wtime">7:00 pm</div>
+              </div>
+              <div class="s4-wicon">🌿</div>
+            </div>
+          </div>
+          <div class="s4-nav">
+            <div class="s4-nd a"></div>
+            <div class="s4-nd"></div>
+            <div class="s4-nd"></div>
+            <div class="s4-nd"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">
+      <span class="num">Option 04</span>
+      <span class="name">Botanical</span>
+      <div class="palette">
+        <div class="swatch" style="background:#F5F0E8"></div>
+        <div class="swatch" style="background:#7D9B76"></div>
+        <div class="swatch" style="background:#C07A5A"></div>
+        <div class="swatch" style="background:#3D2B1F"></div>
+      </div>
+      <span class="tagline">Playfair · Sage &amp; Terracotta · Wellness</span>
+    </div>
+  </div>
+
+
+  <!-- ── OPTION 5: GLASS & BLOOM ── -->
+  <div class="phone-wrapper">
+    <div class="phone-frame">
+      <div class="phone-screen">
+        <div class="screen-5">
+          <div class="s5-blob1"></div>
+          <div class="s5-blob2"></div>
+          <div class="s5-blob3"></div>
+          <div class="island" style="background:rgba(0,0,0,0.35)"></div>
+          <div class="status-bar s5-status">
+            <span>9:41</span>
+            <div class="status-icons"><span>▲</span><span>◼◼◼</span></div>
+          </div>
+          <div class="s5-body">
+            <div class="s5-toprow">
+              <div>
+                <div class="s5-dayname">Thursday, March 5</div>
+                <div class="s5-datenum">Good<br>morning.</div>
+              </div>
+              <div class="s5-streak">
+                <span class="s5-si">🔥</span>
+                <span class="s5-st">12-day streak</span>
+              </div>
+            </div>
+            <div class="s5-quote glass">
+              <div class="s5-qtop">
+                <span class="s5-qicon">✦</span>
+                <span class="s5-qlabel">Daily quote</span>
+              </div>
+              <div class="s5-qtext">"You've already done hard things. This is just another one."</div>
+            </div>
+            <div class="s5-cards">
+              <div class="s5-card glass">
+                <div class="s5-cicon">🥗</div>
+                <div class="s5-ctitle">Dinner</div>
+                <div class="s5-csub">What's in fridge?</div>
+                <span class="s5-cbadge">3 ideas</span>
+              </div>
+              <div class="s5-card glass">
+                <div class="s5-cicon">✅</div>
+                <div class="s5-ctitle">To-Dos</div>
+                <div class="s5-csub">2 this week</div>
+                <span class="s5-cbadge">1 due Fri</span>
+              </div>
+            </div>
+            <div class="s5-schedule glass">
+              <div class="s5-sl">
+                <div class="s5-sdot"></div>
+                <div>
+                  <div class="s5-stitle">Work Schedule</div>
+                  <div class="s5-ssub">Reminder: update Sunday</div>
+                </div>
+              </div>
+              <span class="s5-sarrow">›</span>
+            </div>
+            <div class="s5-workout glass">
+              <div class="s5-wibox">🏃</div>
+              <div>
+                <div class="s5-wt">Evening Workout</div>
+                <div class="s5-ws">Reminder active</div>
+              </div>
+              <div class="s5-wtime">7 pm</div>
+            </div>
+          </div>
+          <div class="s5-tabs">
+            <div class="s5-ti"><span class="s5-tii a">⊙</span><div class="s5-tdot"></div></div>
+            <div class="s5-ti"><span class="s5-tii">◻</span></div>
+            <div class="s5-ti"><span class="s5-tii">◷</span></div>
+            <div class="s5-ti"><span class="s5-tii">☰</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">
+      <span class="num">Option 05</span>
+      <span class="name">Glass &amp; Bloom</span>
+      <div class="palette">
+        <div class="swatch" style="background:#C4B4E4"></div>
+        <div class="swatch" style="background:#E4BEB4"></div>
+        <div class="swatch" style="background:#F0D0A8"></div>
+        <div class="swatch" style="background:rgba(255,255,255,0.9)"></div>
+      </div>
+      <span class="tagline">Plus Jakarta · Glass · Modern iOS</span>
+    </div>
+  </div>
+
+</div><!-- /phones-grid -->
+
+</body>
+</html>
