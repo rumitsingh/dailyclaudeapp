@@ -35,6 +35,8 @@ export default function App() {
             settings={store.settings}
             dinnerHistory={store.dinnerHistory}
             onNavigate={navigate}
+            workoutDoneToday={store.workoutDoneToday}
+            markWorkoutDone={store.markWorkoutDone}
           />
         )
       case 'todos':
@@ -65,6 +67,7 @@ export default function App() {
             updateSchedule={store.updateSchedule}
             addScheduleEvent={store.addScheduleEvent}
             removeScheduleEvent={store.removeScheduleEvent}
+            settings={store.settings}
           />
         )
       case 'settings':
