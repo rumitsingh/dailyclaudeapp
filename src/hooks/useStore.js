@@ -26,6 +26,22 @@ export function useStore() {
     storageGet('dinnerHistory', [])
   )
 
+  const [workoutLog, setWorkoutLogState] = useState(() =>
+    storageGet('workoutLog', {})
+  )
+
+  const today = new Date().toISOString().slice(0, 10)
+  const workoutDoneToday = workoutLog[today] === true
+
+  const markWorkoutDone = useCallback(() => {
+    const date = new Date().toISOString().slice(0, 10)
+    setWorkoutLogState(prev => {
+      const next = { ...prev, [date]: true }
+      storageSet('workoutLog', next)
+      return next
+    })
+  }, [])
+
   // --- Settings ---
   const updateSettings = useCallback((patch) => {
     setSettingsState(prev => {
@@ -173,5 +189,6 @@ export function useStore() {
     fridge, toggleFridgeItem, addFridgeItem, removeFridgeItem, updateFridgeItem,
     schedule, updateSchedule, addScheduleEvent, removeScheduleEvent,
     dinnerHistory, saveDinnerItem, removeDinnerHistory,
+    workoutDoneToday, markWorkoutDone,
   }
 }
