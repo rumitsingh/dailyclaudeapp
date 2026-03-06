@@ -1,24 +1,67 @@
 import { useState, useRef } from 'react'
+import { extractScheduleFromImage } from '../utils/gemini.js'
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 const DAYS_SHORT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
-export default function Schedule({ schedule, updateSchedule, addScheduleEvent, removeScheduleEvent }) {
+export default function Schedule({ schedule, updateSchedule, addScheduleEvent, removeScheduleEvent, settings }) {
   const [showAddForm, setShowAddForm] = useState(false)
   const [selectedDay, setSelectedDay] = useState(0)
   const [form, setForm] = useState({ title: '', start: '09:00', end: '10:00' })
+  const [extracting, setExtracting] = useState(false)
+  const [extractMsg, setExtractMsg] = useState(null) // { type: 'success'|'error', text }
   const fileRef = useRef(null)
 
   const today = new Date()
   const currentDayOfWeek = (today.getDay() + 6) % 7 // Mon=0
+  const isSunday = today.getDay() === 0
 
-  const handlePhotoUpload = (e) => {
+  const handlePhotoUpload = async (e) => {
     const file = e.target.files[0]
     if (!file) return
 
     const reader = new FileReader()
-    reader.onload = (ev) => {
-      updateSchedule({ photoUrl: ev.target.result })
+    reader.onload = async (ev) => {
+      const dataUrl = ev.target.result
+      // Store the photo url for potential future re-import (not displayed)
+      updateSchedule({ photoUrl: dataUrl })
+
+      if (!settings?.geminiKey) {
+        setExtractMsg({ type: 'error', text: 'Add a Gemini API key in Settings to auto-import from photo.' })
+        return
+      }
+
+      setExtracting(true)
+      setExtractMsg(null)
+
+      try {
+        const events = await extractScheduleFromImage(settings.geminiKey, dataUrl)
+
+        if (!events || events.length === 0) {
+          setExtractMsg({ type: 'error', text: 'No events found in the photo. Try a clearer image.' })
+          return
+        }
+
+        // Add each extracted event to the schedule
+        for (const ev of events) {
+          if (ev.title && ev.start && typeof ev.day === 'number') {
+            addScheduleEvent({
+              day: Math.min(6, Math.max(0, ev.day)),
+              title: ev.title,
+              start: ev.start,
+              end: ev.end || addOneHour(ev.start),
+            })
+          }
+        }
+
+        setExtractMsg({ type: 'success', text: `Imported ${events.length} event${events.length !== 1 ? 's' : ''} from your schedule.` })
+      } catch (err) {
+        setExtractMsg({ type: 'error', text: `Could not read schedule: ${err.message}` })
+      } finally {
+        setExtracting(false)
+        // Clear the file input so the same file can be re-selected
+        e.target.value = ''
+      }
     }
     reader.readAsDataURL(file)
   }
@@ -41,7 +84,7 @@ export default function Schedule({ schedule, updateSchedule, addScheduleEvent, r
       .filter(e => e.day === dayIdx)
       .sort((a, b) => a.start.localeCompare(b.start))
 
-  const isSunday = today.getDay() === 0
+  const totalEvents = (schedule.events || []).length
 
   return (
     <div className="flex flex-col gap-4 pb-2">
@@ -54,15 +97,22 @@ export default function Schedule({ schedule, updateSchedule, addScheduleEvent, r
         )}
       </div>
 
-      {/* Photo upload */}
+      {/* Import from photo */}
       <div className="bg-mist-card rounded-xl3 p-4 shadow-card">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="font-inter text-sm font-semibold text-mist-warm">Schedule Photo</h2>
+        <div className="flex items-center justify-between mb-2">
+          <div>
+            <h2 className="font-inter text-sm font-semibold text-mist-warm">Import from photo</h2>
+            <p className="text-xs font-inter text-mist-text-muted mt-0.5">
+              Photograph your schedule and Gemini will read it automatically.
+            </p>
+          </div>
           <button
             onClick={() => fileRef.current?.click()}
-            className="text-xs font-inter font-medium text-mist-sage bg-mist-faint rounded-xl px-3 py-1.5"
+            disabled={extracting}
+            className="flex-shrink-0 ml-3 text-xs font-inter font-semibold text-white bg-mist-sage
+              rounded-xl px-3 py-2 disabled:opacity-50 active:scale-95 transition-transform"
           >
-            {schedule.photoUrl ? 'Update photo' : 'Upload photo'}
+            {extracting ? 'Reading...' : schedule.photoUrl ? 'Update' : 'Import'}
           </button>
           <input
             ref={fileRef}
@@ -73,39 +123,51 @@ export default function Schedule({ schedule, updateSchedule, addScheduleEvent, r
           />
         </div>
 
-        {schedule.photoUrl ? (
-          <img
-            src={schedule.photoUrl}
-            alt="Schedule"
-            className="w-full rounded-xl2 object-contain max-h-64"
-          />
-        ) : (
-          <div
-            onClick={() => fileRef.current?.click()}
-            className="border-2 border-dashed border-mist-divider rounded-xl2 py-8 flex flex-col items-center
-              gap-2 text-mist-text-muted cursor-pointer"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
-              strokeLinecap="round" className="w-8 h-8 opacity-40">
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <circle cx="8.5" cy="8.5" r="1.5" />
-              <polyline points="21 15 16 10 5 21" />
-            </svg>
-            <p className="text-sm font-inter">Tap to add your week photo</p>
+        {/* Status message */}
+        {extracting && (
+          <div className="flex items-center gap-2 mt-2 text-xs font-inter text-mist-sage">
+            <div className="w-3 h-3 border-2 border-mist-sage border-t-transparent rounded-full animate-spin" />
+            Reading your schedule...
           </div>
+        )}
+        {extractMsg && (
+          <p className={`text-xs font-inter mt-2 leading-relaxed
+            ${extractMsg.type === 'success' ? 'text-mist-sage' : 'text-red-400'}`}>
+            {extractMsg.text}
+          </p>
+        )}
+        {!settings?.geminiKey && !extractMsg && (
+          <p className="text-xs font-inter text-amber-500 mt-2">
+            Add a Gemini API key in Settings to enable photo import.
+          </p>
         )}
       </div>
 
       {/* Week grid */}
       <div className="bg-mist-card rounded-xl3 p-4 shadow-card">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-inter text-sm font-semibold text-mist-warm">This Week</h2>
-          <button
-            onClick={() => setShowAddForm(s => !s)}
-            className="text-xs font-inter font-medium text-mist-sage bg-mist-faint rounded-xl px-3 py-1.5"
-          >
-            {showAddForm ? 'Cancel' : '+ Add event'}
-          </button>
+          <div>
+            <h2 className="font-inter text-sm font-semibold text-mist-warm">This Week</h2>
+            {totalEvents > 0 && (
+              <p className="text-[11px] font-inter text-mist-text-muted mt-0.5">{totalEvents} event{totalEvents !== 1 ? 's' : ''}</p>
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            {totalEvents > 0 && (
+              <button
+                onClick={() => updateSchedule({ events: [] })}
+                className="text-xs font-inter text-red-400 bg-red-50 rounded-xl px-2.5 py-1.5"
+              >
+                Clear all
+              </button>
+            )}
+            <button
+              onClick={() => setShowAddForm(s => !s)}
+              className="text-xs font-inter font-medium text-mist-sage bg-mist-faint rounded-xl px-3 py-1.5"
+            >
+              {showAddForm ? 'Cancel' : '+ Add'}
+            </button>
+          </div>
         </div>
 
         {/* Add event form */}
@@ -118,10 +180,7 @@ export default function Schedule({ schedule, updateSchedule, addScheduleEvent, r
                   type="button"
                   onClick={() => setSelectedDay(i)}
                   className={`text-xs font-inter font-medium rounded-xl px-2.5 py-1.5 transition-colors
-                    ${selectedDay === i
-                      ? 'bg-mist-sage text-white'
-                      : 'bg-mist-card text-mist-text-muted'
-                    }`}
+                    ${selectedDay === i ? 'bg-mist-sage text-white' : 'bg-mist-card text-mist-text-muted'}`}
                 >
                   {d}
                 </button>
@@ -216,5 +275,11 @@ function formatTime(t) {
   if (!t) return ''
   const [h, m] = t.split(':').map(Number)
   const period = h >= 12 ? 'pm' : 'am'
-  return `${h % 12 || 12}:${String(m).padStart(2,'0')}${period}`
+  return `${h % 12 || 12}:${String(m).padStart(2, '0')}${period}`
+}
+
+function addOneHour(timeStr) {
+  const [h, m] = timeStr.split(':').map(Number)
+  const newH = (h + 1) % 24
+  return `${String(newH).padStart(2, '0')}:${String(m).padStart(2, '0')}`
 }
